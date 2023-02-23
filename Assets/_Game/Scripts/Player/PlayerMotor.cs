@@ -25,7 +25,7 @@ public class PlayerMotor : MonoBehaviour
 
     void Update()
     {
-        Vector2 inputVector = _inputHandler.GetMovementVector();
+        Vector2 inputVector = _inputHandler.GetMovementVectorNormalized();
 
         if (inputVector == Vector2.zero)
         {
