@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
     [GetComponent] [SerializeField] PlayerMotor _playerMotor;
     [GetComponentInChildren()] [SerializeField] Animator _animator;
+    static readonly int walking = Animator.StringToHash("IsWalking");
 
     void OnEnable()
     {
@@ -21,6 +22,6 @@ public class Player : MonoBehaviour
 
     void HandleMove(bool isWalking)
     {
-        _animator.SetBool("IsWalking", isWalking);
+        _animator.SetBool(walking, isWalking);
     }
 }
