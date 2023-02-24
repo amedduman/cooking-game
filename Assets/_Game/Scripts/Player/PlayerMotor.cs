@@ -7,13 +7,19 @@ using UnityEngine.Events;
 
 public class PlayerMotor : MonoBehaviour
 {
+    [Header("movement")]
     [SerializeField] float _speed = 5;
     [SerializeField] float _rotSpeed = 5;
-    [SerializeField] [Min(.5f)] float _collisionDetectionRayMaxLength = .7f;
+    [Header("collision detection")]
+    [SerializeField] [Min(.1f)] float _collisionDetectionRayMaxLength = .1f;
     [SerializeField] [Min(.5f)] float _collisionDetectionSphereRadius = .7f;
+    [Header("interaction")]
+    [SerializeField] float _interactionRayMaxLength = 2;
+
     public event Action<bool> OnMove;
     InputHandler _inputHandler;
     Transform _tr;
+    Vector3 _lastAttemptedMoveDir;
 
     #region UnityCallbacks
 
@@ -29,7 +35,13 @@ public class PlayerMotor : MonoBehaviour
 
     void Update()
     {
+        
         Vector2 inputVector = _inputHandler.GetMovementVectorNormalized();
+        
+        Vector3 attemptedMoveDir = new Vector3(inputVector.x, 0, inputVector.y);
+
+        HandleInteractions(attemptedMoveDir);
+
 
         if (inputVector == Vector2.zero)
         {
@@ -39,7 +51,6 @@ public class PlayerMotor : MonoBehaviour
 
         OnMove?.Invoke(true);
         
-        Vector3 attemptedMoveDir = new Vector3(inputVector.x, 0, inputVector.y);
 
         Vector3 normalizedMoveDir = GetMoveableDirectionIfAny(attemptedMoveDir).normalized;
         if(normalizedMoveDir == Vector3.zero) return;
@@ -62,6 +73,18 @@ public class PlayerMotor : MonoBehaviour
         Vector3 rotDir = _tr.forward;
         rotDir = Vector3.Slerp(rotDir, moveDir, Time.deltaTime * _rotSpeed);
         _tr.forward = rotDir;
+    }
+
+    void HandleInteractions(Vector3 dir)
+    {
+        if (dir != Vector3.zero)
+        {
+            _lastAttemptedMoveDir = dir;
+        }
+        if (Physics.Raycast(_tr.position, _lastAttemptedMoveDir, out RaycastHit hitInfo, _interactionRayMaxLength))
+        {
+            Debug.Log(hitInfo.transform.gameObject.name);
+        }
     }
 
     Vector3 GetMoveableDirectionIfAny(Vector3 moveDir)
