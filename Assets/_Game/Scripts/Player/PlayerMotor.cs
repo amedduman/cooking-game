@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -20,12 +21,14 @@ public class PlayerMotor : MonoBehaviour
     InputHandler _inputHandler;
     Transform _tr;
     Vector3 _lastAttemptedMoveDir;
+    LayerMask _counterLayerMask;
 
     #region UnityCallbacks
 
     void Awake()
     {
         _tr = transform;
+        _counterLayerMask = LayerMask.NameToLayer("Counter");
     }
 
     void Start()
@@ -81,15 +84,37 @@ public class PlayerMotor : MonoBehaviour
         {
             _lastAttemptedMoveDir = dir;
         }
-        if (Physics.Raycast(_tr.position, _lastAttemptedMoveDir, out RaycastHit hitInfo, _interactionRayMaxLength))
+        if (Physics.Raycast(_tr.position, _lastAttemptedMoveDir,
+                out RaycastHit hitInfo, _interactionRayMaxLength, _counterLayerMask))
         {
             if (hitInfo.transform.TryGetComponent(out IInteractable interactable))
             {
                 interactable.Interact();
             }
         }
+        
+        // if (Physics.RaycastNonAlloc(_tr.position, _lastAttemptedMoveDir, _hits, _interactionRayMaxLength) > 0)
+        // {
+        //     foreach (var hit in _hits)
+        //     {
+        //         if (hit.transform == null) continue;
+        //         if (hit.transform.TryGetComponent(out IInteractable interactable))
+        //         {
+        //             interactable.Interact();
+        //         }
+        //     }
+        //
+        //     // for (int i = 0; i < _hits.Length; i++)
+        //     // {
+        //     //     if (_hits[i].transform == null) continue;
+        //     //     if (_hits[i].transform.TryGetComponent(out IInteractable interactable))
+        //     //     {
+        //     //         interactable.Interact();
+        //     //     }
+        //     // }
+        // }
     }
-
+    
     Vector3 GetMoveableDirectionIfAny(Vector3 moveDir)
     {
         if(!CastWithCollider(moveDir)) return moveDir;
