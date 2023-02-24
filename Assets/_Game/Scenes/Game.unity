@@ -511,6 +511,7 @@ GameObject:
   - component: {fileID: 716650975}
   - component: {fileID: 716650977}
   - component: {fileID: 716650976}
+  - component: {fileID: 716650978}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -546,14 +547,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81adc97abd4e041fd82d3e333ca716a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerInteractionHandler: {fileID: 716650978}
   _speed: 5
   _rotSpeed: 15
   _collisionDetectionRayMaxLength: 0.2
   _collisionDetectionSphereRadius: 0.7
-  _interactionRayMaxLength: 2
-  _counterLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!114 &716650977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -568,6 +566,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerMotor: {fileID: 716650976}
   _animator: {fileID: 1848872616}
+--- !u!114 &716650978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716650974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43e02813492e4307b43c274dc9c2eaa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactionRayMaxLength: 2
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

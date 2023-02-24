@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Nrjwolf.Tools.AttachAttributes;
 using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,27 +9,24 @@ using UnityEngine.Events;
 
 public class PlayerMotor : MonoBehaviour
 {
+    [GetComponent] [SerializeField] PlayerInteractionHandler _playerInteractionHandler;
     [Header("movement")]
     [SerializeField] float _speed = 5;
     [SerializeField] float _rotSpeed = 5;
     [Header("collision detection")]
     [SerializeField] [Min(.1f)] float _collisionDetectionRayMaxLength = .1f;
     [SerializeField] [Min(.5f)] float _collisionDetectionSphereRadius = .7f;
-    [Header("interaction")]
-    [SerializeField] float _interactionRayMaxLength = 2;
+    
 
     public event Action<bool> OnMove;
     InputHandler _inputHandler;
     Transform _tr;
-    Vector3 _lastAttemptedMoveDir;
-    LayerMask _counterLayerMask;
 
     #region UnityCallbacks
 
     void Awake()
     {
         _tr = transform;
-        _counterLayerMask = LayerMask.NameToLayer("Counter");
     }
 
     void Start()
@@ -43,7 +41,7 @@ public class PlayerMotor : MonoBehaviour
         
         Vector3 attemptedMoveDir = new Vector3(inputVector.x, 0, inputVector.y);
 
-        HandleInteractions(attemptedMoveDir);
+        _playerInteractionHandler.HandleInteractions(attemptedMoveDir);
 
 
         if (inputVector == Vector2.zero)
@@ -78,43 +76,6 @@ public class PlayerMotor : MonoBehaviour
         _tr.forward = rotDir;
     }
 
-    void HandleInteractions(Vector3 dir)
-    {
-        if (dir != Vector3.zero)
-        {
-            _lastAttemptedMoveDir = dir;
-        }
-        if (Physics.Raycast(_tr.position, _lastAttemptedMoveDir,
-                out RaycastHit hitInfo, _interactionRayMaxLength, _counterLayerMask))
-        {
-            if (hitInfo.transform.TryGetComponent(out IInteractable interactable))
-            {
-                interactable.Interact();
-            }
-        }
-        
-        // if (Physics.RaycastNonAlloc(_tr.position, _lastAttemptedMoveDir, _hits, _interactionRayMaxLength) > 0)
-        // {
-        //     foreach (var hit in _hits)
-        //     {
-        //         if (hit.transform == null) continue;
-        //         if (hit.transform.TryGetComponent(out IInteractable interactable))
-        //         {
-        //             interactable.Interact();
-        //         }
-        //     }
-        //
-        //     // for (int i = 0; i < _hits.Length; i++)
-        //     // {
-        //     //     if (_hits[i].transform == null) continue;
-        //     //     if (_hits[i].transform.TryGetComponent(out IInteractable interactable))
-        //     //     {
-        //     //         interactable.Interact();
-        //     //     }
-        //     // }
-        // }
-    }
-    
     Vector3 GetMoveableDirectionIfAny(Vector3 moveDir)
     {
         if(!CastWithCollider(moveDir)) return moveDir;
