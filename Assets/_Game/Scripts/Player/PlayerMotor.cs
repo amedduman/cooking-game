@@ -14,6 +14,8 @@ public class PlayerMotor : MonoBehaviour
     InputHandler _inputHandler;
     Transform _tr;
 
+    #region UnityCallbacks
+
     void Awake()
     {
         _tr = transform;
@@ -36,16 +38,18 @@ public class PlayerMotor : MonoBehaviour
 
         OnMove?.Invoke(true);
         
-        Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
-        
-        if (!CanMove(ref moveDir)) return;
-        
-        moveDir.Normalize();
-        
-        Move(moveDir);
+        Vector3 attemptedMoveDir = new Vector3(inputVector.x, 0, inputVector.y);
 
-        Rotate(moveDir);
+        Vector3 normalizedMoveDir = GetMoveableDirectionIfAny(attemptedMoveDir).normalized;
+        if(normalizedMoveDir == Vector3.zero) return;
+        
+        Move(normalizedMoveDir);
+
+        Rotate(normalizedMoveDir);
     }
+
+    #endregion
+    
 
     void Move(Vector3 moveDir)
     {
@@ -59,43 +63,32 @@ public class PlayerMotor : MonoBehaviour
         _tr.forward = rotDir;
     }
 
-    bool CanMove(ref Vector3 moveDir)
+    Vector3 GetMoveableDirectionIfAny(Vector3 moveDir)
     {
         bool canMove = false;
-        canMove = !Physics.SphereCast(_tr.position, _collisionDetectionSphereRadius, moveDir, out RaycastHit hitInfo,
-            _collisionDetectionRayMaxLength);
-        if (canMove) return true;
+        canMove = !SphereCast(moveDir);
+        if (canMove) return moveDir;
 
         if (!Mathf.Approximately(moveDir.x, 0))
         {
             Vector3 moveDirX = new Vector3(moveDir.x, 0, 0);
-            Debug.Log("red");
-            Debug.DrawLine(_tr.position, _tr.position + moveDirX, Color.red);
-            canMove = !Physics.SphereCast(_tr.position, _collisionDetectionSphereRadius, moveDirX, out RaycastHit hitInfo2,
-                _collisionDetectionRayMaxLength);
-            if(canMove) moveDir = moveDirX;
-            
+            canMove = !SphereCast(moveDirX);
+            if (canMove) return moveDirX;
         }
 
-        if (canMove) return true;
-        
         if (!Mathf.Approximately(moveDir.z, 0))
         {
             Vector3 moveDirZ = new Vector3(0, 0, moveDir.z);
-            Debug.DrawLine(_tr.position, _tr.position + moveDirZ, Color.green);
-            canMove = !Physics.SphereCast(_tr.position, _collisionDetectionSphereRadius, moveDirZ, out RaycastHit hitInfo2,
-                _collisionDetectionRayMaxLength);
-            if(canMove) moveDir = moveDirZ;
+            canMove = !SphereCast(moveDirZ);
+            if(canMove)  return moveDirZ;
         }
         
-        return canMove;
-    }
+        return Vector3.zero;
 
-    void OnDrawGizmos()
-    {
-        // draw collision detection sphere        
-        _tr = transform;
-        Gizmos.color = Color.red;
-        // Gizmos.DrawSphere(_tr.position, _collisionDetectionSphereRadius);
+        bool SphereCast(Vector3 dir)
+        {
+            return Physics.SphereCast(_tr.position, _collisionDetectionSphereRadius, dir, out RaycastHit hitInfo2,
+                _collisionDetectionRayMaxLength);
+        }
     }
 }
