@@ -83,7 +83,10 @@ public class PlayerMotor : MonoBehaviour
         }
         if (Physics.Raycast(_tr.position, _lastAttemptedMoveDir, out RaycastHit hitInfo, _interactionRayMaxLength))
         {
-            Debug.Log(hitInfo.transform.gameObject.name);
+            if (hitInfo.transform.TryGetComponent(out IInteractable interactable))
+            {
+                interactable.Interact();
+            }
         }
     }
 
