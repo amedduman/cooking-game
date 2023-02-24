@@ -547,7 +547,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81adc97abd4e041fd82d3e333ca716a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerInteractionHandler: {fileID: 716650978}
   _speed: 5
   _rotSpeed: 15
   _collisionDetectionRayMaxLength: 0.2
@@ -578,6 +577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43e02813492e4307b43c274dc9c2eaa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerMotor: {fileID: 716650976}
   _interactionRayMaxLength: 2
 --- !u!1 &832575517
 GameObject:

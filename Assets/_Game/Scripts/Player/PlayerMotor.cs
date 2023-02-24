@@ -1,24 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Nrjwolf.Tools.AttachAttributes;
-using Unity.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class PlayerMotor : MonoBehaviour
 {
-    [GetComponent] [SerializeField] PlayerInteractionHandler _playerInteractionHandler;
+    public event Action<bool> OnMove;
+    
     [Header("movement")]
     [SerializeField] float _speed = 5;
     [SerializeField] float _rotSpeed = 5;
     [Header("collision detection")]
     [SerializeField] [Min(.1f)] float _collisionDetectionRayMaxLength = .1f;
     [SerializeField] [Min(.5f)] float _collisionDetectionSphereRadius = .7f;
-    
 
-    public event Action<bool> OnMove;
     InputHandler _inputHandler;
     Transform _tr;
 
@@ -36,15 +31,9 @@ public class PlayerMotor : MonoBehaviour
 
     void Update()
     {
-        
-        Vector2 inputVector = _inputHandler.GetMovementVectorNormalized();
-        
-        Vector3 attemptedMoveDir = new Vector3(inputVector.x, 0, inputVector.y);
+        Vector3 attemptedMoveDir = GetAttemptedMoveDir();
 
-        _playerInteractionHandler.HandleInteractions(attemptedMoveDir);
-
-
-        if (inputVector == Vector2.zero)
+        if (GetInputVector() == Vector2.zero)
         {
             OnMove?.Invoke(false);
             return;
@@ -62,7 +51,17 @@ public class PlayerMotor : MonoBehaviour
     }
 
     #endregion
-    
+
+    #region PublicMethods
+
+    public Vector3 GetAttemptedMoveDir()
+    {
+        Vector2 inputVector = GetInputVector();
+
+        return new Vector3(inputVector.x, 0, inputVector.y);
+    }
+
+    #endregion
 
     void Move(Vector3 moveDir)
     {
@@ -99,5 +98,10 @@ public class PlayerMotor : MonoBehaviour
             return Physics.SphereCast(_tr.position, _collisionDetectionSphereRadius, dir, out RaycastHit hitInfo2,
                 _collisionDetectionRayMaxLength);
         }
+    }
+    
+    Vector2 GetInputVector()
+    {
+        return _inputHandler.GetMovementVectorNormalized();
     }
 }
