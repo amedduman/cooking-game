@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -65,27 +66,23 @@ public class PlayerMotor : MonoBehaviour
 
     Vector3 GetMoveableDirectionIfAny(Vector3 moveDir)
     {
-        bool canMove = false;
-        canMove = !SphereCast(moveDir);
-        if (canMove) return moveDir;
+        if(!CastWithCollider(moveDir)) return moveDir;
 
         if (!Mathf.Approximately(moveDir.x, 0))
         {
             Vector3 moveDirX = new Vector3(moveDir.x, 0, 0);
-            canMove = !SphereCast(moveDirX);
-            if (canMove) return moveDirX;
+            if(!CastWithCollider(moveDirX)) return moveDirX;
         }
 
         if (!Mathf.Approximately(moveDir.z, 0))
         {
             Vector3 moveDirZ = new Vector3(0, 0, moveDir.z);
-            canMove = !SphereCast(moveDirZ);
-            if(canMove)  return moveDirZ;
+            if(!CastWithCollider(moveDirZ)) return moveDirZ;
         }
         
         return Vector3.zero;
 
-        bool SphereCast(Vector3 dir)
+        bool CastWithCollider(Vector3 dir)
         {
             return Physics.SphereCast(_tr.position, _collisionDetectionSphereRadius, dir, out RaycastHit hitInfo2,
                 _collisionDetectionRayMaxLength);
