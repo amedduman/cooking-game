@@ -198,8 +198,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1699d33e43574fe48debf9d39a9c7af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _realCounterVisual: {fileID: 1355159591377202499}
   _selectedCounterVisual: {fileID: 6468465163296308696}
+  _kitchenObjectSO: {fileID: 0}
+  _spawningPoint: {x: 0, y: 1.25, z: 0}
 --- !u!1001 &7422361539695160844
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -269,9 +270,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0004cb1e11ad014419b943c7da960724, type: 3}
---- !u!1 &1355159591377202499 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8489276541531669327, guid: 0004cb1e11ad014419b943c7da960724,
-    type: 3}
-  m_PrefabInstance: {fileID: 7422361539695160844}
-  m_PrefabAsset: {fileID: 0}

@@ -12,4 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aee7838ac3d3e994090b23abf0ca8ea0, type: 3}
   m_Name: ListData
   m_EditorClassIdentifier: 
-  References: []
+  References:
+  - type: 1
+    actualReference: {fileID: 102900000, guid: f330c1d37c511c448be72648a9cccb5b, type: 3}
+    cachedDrawData:
+      Name: CountersVisuals
+      Icon: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000,
+        type: 0}
+      SceneData:
+        IsScene: 0
+        Scene: {fileID: 0}
+    cachedTypes:
+    - DefaultAsset
+    sceneGUID: 
+    localIdentifier: 0
+  - type: 1
+    actualReference: {fileID: 102900000, guid: 3549977b22fc94d67b37714d4c8b5b38, type: 3}
+    cachedDrawData:
+      Name: Counters
+      Icon: {fileID: 3764734208316478041, guid: 0000000000000000d000000000000000,
+        type: 0}
+      SceneData:
+        IsScene: 0
+        Scene: {fileID: 0}
+    cachedTypes:
+    - DefaultAsset
+    sceneGUID: 
+    localIdentifier: 0

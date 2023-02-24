@@ -9,7 +9,6 @@ public class Counter : MonoBehaviour, IInteractable
     
     public virtual void Interact()
     {
-        Debug.Log("interact");
     }
 
     public void Highlight()
