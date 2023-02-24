@@ -10,25 +10,36 @@ public class PlayerInteractionHandler : MonoBehaviour
     Vector3 _lastAttemptedMoveDir;
     LayerMask _counterLayerMask;
     Transform _tr;
-
+    bool _canInteract;
+    
     void Awake()
     {
         _tr = transform;
         _inputHandler = ServiceLocator.Get<InputHandler>();
         _counterLayerMask = LayerMask.GetMask("Counter");
     }
-
+    
     void OnEnable()
     {
-        _inputHandler.OnInteractButtonPressed += HandleInteractions;
+        _inputHandler.OnInteractButtonPressed += HandleInteractButtonPressed;
     }
 
     void OnDisable()
     {
-        _inputHandler.OnInteractButtonPressed += HandleInteractions;
+        _inputHandler.OnInteractButtonPressed -= HandleInteractButtonPressed;
     }
 
-    void HandleInteractions()
+    void Update()
+    {
+        Interact();
+    }
+    
+    void HandleInteractButtonPressed()
+    {
+        _canInteract = true;
+    }
+
+    void Interact()
     {
         Vector3 attemptedMoveDir = _playerMotor.GetAttemptedMoveDir();
         
@@ -42,8 +53,12 @@ public class PlayerInteractionHandler : MonoBehaviour
         {
             if (hitInfo.transform.TryGetComponent(out IInteractable interactable))
             {
-                interactable.Interact();
+                interactable.Highlight();
+                if(_canInteract)
+                    interactable.Interact();
             }
         }
+
+        _canInteract = false;
     }        
 }
