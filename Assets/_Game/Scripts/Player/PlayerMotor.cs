@@ -41,13 +41,12 @@ public class PlayerMotor : MonoBehaviour
 
         OnMove?.Invoke(true);
         
+        Rotate(attemptedMoveDir);
 
         Vector3 normalizedMoveDir = GetMoveableDirectionIfAny(attemptedMoveDir).normalized;
         if(normalizedMoveDir == Vector3.zero) return;
         
         Move(normalizedMoveDir);
-
-        Rotate(normalizedMoveDir);
     }
 
     #endregion
