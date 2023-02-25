@@ -15,10 +15,10 @@ public class EmptyCounter : Counter
         if (_myKitchenObj == null)
         {
             _myKitchenObj = Instantiate(_kitchenObjectSO.Prefab, GetSpawnPoint(), Quaternion.identity);
+            _myKitchenObj.Counter = this;
         }
         else
         {
-            Debug.Log(_kitchenObjectSO.Name);
         }
     }
 
