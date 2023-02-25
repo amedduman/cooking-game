@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 
 public class ContainerCounter : Counter
 {
     [SerializeField] KitchenObjectSO _kitchenObjectSO;
+    [SerializeField] SpriteRenderer _iconSpriteRenderer;
+    
     
     public override void Interact()
     {
@@ -21,5 +24,11 @@ public class ContainerCounter : Counter
         {
             return true;
         }
+    }
+
+    void OnValidate()
+    {
+        if (_iconSpriteRenderer == null || _kitchenObjectSO == null) return;
+        _iconSpriteRenderer.sprite = _kitchenObjectSO.Icon;
     }
 }

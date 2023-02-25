@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class KitchenObject : MonoBehaviour
 {
-    public Counter Counter;
+    [HideInInspector] public Counter Counter;
 }
