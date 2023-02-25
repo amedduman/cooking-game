@@ -1,15 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Counter : MonoBehaviour, IInteractable
+public abstract class Counter : MonoBehaviour, IInteractable
 {
+    protected Player _player;
     [SerializeField] GameObject _selectedCounterVisual;
     Coroutine _highlightCoroutine;
-    
-    public virtual void Interact()
+
+    public void Awake()
     {
+        _player = ServiceLocator.Get<Player>();
     }
+
+    public abstract void Interact();
 
     public void Highlight()
     {
@@ -24,5 +29,6 @@ public class Counter : MonoBehaviour, IInteractable
         yield return new WaitForEndOfFrame();
         _selectedCounterVisual.SetActive(false);
     }
-    
+
+    public abstract bool IsCounterAvailableToInteract(Player player);
 }

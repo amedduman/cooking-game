@@ -5,12 +5,13 @@ using UnityEngine;
 public class PlayerInteractionHandler : MonoBehaviour
 {
     [GetComponent] [SerializeField] PlayerMotor _playerMotor;
+    [GetComponent] [SerializeField] Player _player;
     [SerializeField] [Min(2)] float _interactionRayMaxLength = 2;
     InputHandler _inputHandler;
     Vector3 _lastAttemptedMoveDir;
     LayerMask _counterLayerMask;
     Transform _tr;
-    bool _canInteract;
+    bool _hasInteractButtonPressed;
     
     void Awake()
     {
@@ -36,7 +37,7 @@ public class PlayerInteractionHandler : MonoBehaviour
     
     void HandleInteractButtonPressed()
     {
-        _canInteract = true;
+        _hasInteractButtonPressed = true;
     }
 
     void Interact()
@@ -51,14 +52,18 @@ public class PlayerInteractionHandler : MonoBehaviour
         if (Physics.Raycast(_tr.position, _lastAttemptedMoveDir,
                 out RaycastHit hitInfo, _interactionRayMaxLength, _counterLayerMask))
         {
-            if (hitInfo.transform.TryGetComponent(out IInteractable interactable))
+            if (hitInfo.transform.TryGetComponent(out Counter counter))
             {
-                interactable.Highlight();
-                if(_canInteract)
-                    interactable.Interact();
+                counter.Highlight();
+                
+                if (!_hasInteractButtonPressed) return;
+
+                if (!counter.IsCounterAvailableToInteract(_player)) return;
+                
+                counter.Interact();
             }
         }
 
-        _canInteract = false;
+        _hasInteractButtonPressed = false;
     }        
 }
