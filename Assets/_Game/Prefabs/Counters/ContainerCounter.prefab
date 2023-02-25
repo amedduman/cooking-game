@@ -122,7 +122,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1a0afd856a35421469b28b916116fd9c, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6289625630049244101, guid: 9a9137fa2b035d34e881701d2c178192, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9a9137fa2b035d34e881701d2c178192, type: 3}
 --- !u!1 &787984023462727699 stripped
 GameObject:
@@ -232,6 +233,7 @@ MonoBehaviour:
   _kitchenObjectPoint: {fileID: 273339423134871487}
   _kitchenObjectSO: {fileID: 0}
   _iconSpriteRenderer: {fileID: 2130404270165407849}
+  _animator: {fileID: 717824619213624103}
 --- !u!4 &6305103651787974102 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1208666745122836160, guid: cba16e1074cb6491393776c4bdfdbc81,
@@ -307,6 +309,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a9137fa2b035d34e881701d2c178192, type: 3}
+--- !u!95 &717824619213624103 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6289625630049244101, guid: 9a9137fa2b035d34e881701d2c178192,
+    type: 3}
+  m_PrefabInstance: {fileID: 6827180644653924578}
+  m_PrefabAsset: {fileID: 0}
 --- !u!212 &2130404270165407849 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4841286013473667211, guid: 9a9137fa2b035d34e881701d2c178192,

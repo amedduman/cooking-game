@@ -1,14 +1,16 @@
 using System;
+using Nrjwolf.Tools.AttachAttributes;
 using UnityEngine;
 
 public class ContainerCounter : Counter
 {
     [SerializeField] KitchenObjectSO _kitchenObjectSO;
     [SerializeField] SpriteRenderer _iconSpriteRenderer;
-    
+    [GetComponentInChildren()] [SerializeField] Animator _animator;
     
     public override void Interact()
     {
+        _animator.SetTrigger("OpenClose");
         var kitchenObject = Instantiate(_kitchenObjectSO.Prefab, _kitchenObjectPoint.position, Quaternion.identity);
         _player.PickKitchenObject(kitchenObject);
     }

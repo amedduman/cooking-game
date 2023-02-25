@@ -279,6 +279,12 @@ PrefabInstance:
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27f5c316ee36d4285aaeaba85c87954a, type: 3}
+--- !u!95 &282167708 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 717824619213624103, guid: 64de3704ece4f46c3bf65601b3aad778,
+    type: 3}
+  m_PrefabInstance: {fileID: 1387564200}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &286531380
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1170,6 +1176,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ContainerCounter (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3241961240473486847, guid: 64de3704ece4f46c3bf65601b3aad778,
+        type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 282167708}
     - target: {fileID: 3241961240473486847, guid: 64de3704ece4f46c3bf65601b3aad778,
         type: 3}
       propertyPath: _kitchenObjectSO
