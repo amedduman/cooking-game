@@ -8,6 +8,7 @@ public abstract class Counter : MonoBehaviour, IInteractable
     protected Player _player;
     [SerializeField] GameObject _selectedCounterVisual;
     Coroutine _highlightCoroutine;
+    [SerializeField] protected Transform _kitchenObjectPoint;
 
     public void Awake()
     {

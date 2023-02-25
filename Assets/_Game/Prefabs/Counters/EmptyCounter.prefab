@@ -167,6 +167,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4939655615541183657, guid: cba16e1074cb6491393776c4bdfdbc81,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6456137586186745123, guid: cba16e1074cb6491393776c4bdfdbc81,
+        type: 3}
+      propertyPath: m_Name
+      value: KitchenObjectPoint
+      objectReference: {fileID: 0}
     - target: {fileID: 7416711514850250132, guid: cba16e1074cb6491393776c4bdfdbc81,
         type: 3}
       propertyPath: m_Name
@@ -199,8 +209,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectedCounterVisual: {fileID: 6468465163296308696}
-  _kitchenObjectSO: {fileID: 0}
-  _spawningPoint: {x: 0, y: 1.25, z: 0}
+  _kitchenObjectPoint: {fileID: 7745117969055566888}
+--- !u!4 &7745117969055566888 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4939655615541183657, guid: cba16e1074cb6491393776c4bdfdbc81,
+    type: 3}
+  m_PrefabInstance: {fileID: 3454543890463705217}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7422361539695160844
 PrefabInstance:
   m_ObjectHideFlags: 0
