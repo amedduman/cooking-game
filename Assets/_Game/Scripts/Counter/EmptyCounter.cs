@@ -32,11 +32,6 @@ public class EmptyCounter : Counter
         }
     }
 
-    // public override bool IsCounterAvailableToInteract(Player player)
-    // {
-    //     return true;
-    // }
-
     void PutKitchenObjToPos()
     {
         _myKitchenObj.transform.parent = _kitchenObjectPoint;

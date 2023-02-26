@@ -69,19 +69,6 @@ public class PlayerInteractionHandler : MonoBehaviour
                 
                 if(_hasInteractAlternateButtonPressed)
                     counter.InteractAlternate();
-
-                // if (_hasInteractAlternateButtonPressed)
-                // {
-                //     if (_player.MyKitchenObject != null) return; // if player hold something cant interact with cutting counter
-                //     if (counter.TryGetComponent(out CuttingCounter cuttingCounter))
-                //     {
-                //         cuttingCounter.Slice();
-                //     }
-                //
-                //     _hasInteractAlternateButtonPressed = false;
-                // }
-
-                // if (!counter.IsCounterAvailableToInteract(_player)) return;
             }
         }
 

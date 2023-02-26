@@ -81,45 +81,6 @@ public class CuttingCounter : Counter
         }
     }
 
-    // public override bool IsCounterAvailableToInteract(Player player)
-    // {
-    //     if (_player.MyKitchenObject == null)
-    //     {
-    //         if (_myKitchenObj != null)
-    //         {
-    //             if (_myKitchenObj.IsSliced)
-    //             {
-    //                 return true;
-    //             }
-    //
-    //             return false;
-    //         }
-    //
-    //         return false;
-    //     }
-    //     else
-    //     {
-    //         if (_player.MyKitchenObject.IsSliceable)
-    //         {
-    //             if (_myKitchenObj == null)
-    //             {
-    //                 return true;
-    //             }
-    //             else
-    //             {
-    //                 if (_myKitchenObj.IsSliced)
-    //                 {
-    //                     return true;
-    //                 }
-    //
-    //                 return false;
-    //             }
-    //         }
-    //
-    //         return false;
-    //     }
-    // }
-    
     void PutKitchenObjToPos()
     {
         _myKitchenObj.transform.parent = _kitchenObjectPoint;

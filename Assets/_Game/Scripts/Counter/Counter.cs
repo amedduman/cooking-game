@@ -35,6 +35,4 @@ public abstract class Counter : MonoBehaviour, IInteractable
         yield return new WaitForEndOfFrame();
         _selectedCounterVisual.SetActive(false);
     }
-
-    // public abstract bool IsCounterAvailableToInteract(Player player);
 }
