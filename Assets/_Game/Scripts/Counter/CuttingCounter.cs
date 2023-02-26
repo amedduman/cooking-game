@@ -1,11 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CuttingCounter : Counter
 {
+    [SerializeField] Animator _animator;
+    [SerializeField] Image _progressBar;
+    
     KitchenObject _myKitchenObj;
+
+    void Start()
+    {
+        _progressBar.fillAmount = 0;
+        _progressBar.GetComponentInParent<Canvas>().gameObject.SetActive(false);
+    }
 
     public override void Interact()
     {
@@ -71,11 +82,23 @@ public class CuttingCounter : Counter
         if (_myKitchenObj.IsSliceable)
         {
             _myKitchenObj.Slice();
+            _animator.SetTrigger("Cut");
+            UpdateProgressBar();
         }
         else
         {
             Debug.LogError("system shouldn't allow call slice function on non-sliceable kitchen objects. because system shouldn't allow put non slice-able object in the cutting counter");
         }
+    }
+    
+    void UpdateProgressBar()
+    {
+        float amount = (float)_myKitchenObj.CurrentHitCount / _myKitchenObj.NecessaryHitToSlice;
+        if(!Mathf.Approximately(amount, 0))
+            _progressBar.transform.parent.gameObject.SetActive(true);
+        _progressBar.DOFillAmount(amount, .1f);
+        if(Mathf.Approximately(amount, 1))
+            _progressBar.transform.parent.gameObject.SetActive(false);
     }
 
     void PutKitchenObjToPos()
