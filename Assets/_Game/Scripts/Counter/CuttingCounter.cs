@@ -11,27 +11,28 @@ public class CuttingCounter : Counter
     {
         if (_myKitchenObj == null)
         {
+            if (_player.MyKitchenObject == null) return;
+            if (!_player.MyKitchenObject.IsSliceable) return;
+            if (_player.MyKitchenObject.IsSliced) return;
+
             var takenKitchenObj = _player.DropKitchenObject();
-            if (takenKitchenObj == null) return;
-            if (!takenKitchenObj.IsSliceable) return;
             _myKitchenObj = takenKitchenObj;
             PutKitchenObjToPos();
+            
             return;
         }
-        
-        
         
         if (_myKitchenObj.IsSliced)
         {
             if (_player.MyKitchenObject != null)
             {
-                if (_player.MyKitchenObject.IsSliceable)
-                {
-                    var newKitchenObj = _player.MyKitchenObject;
-                    _player.PickKitchenObject(_myKitchenObj);
-                    _myKitchenObj = newKitchenObj;
-                    PutKitchenObjToPos();
-                }
+                if (_player.MyKitchenObject.IsSliced) return;
+                if (!_player.MyKitchenObject.IsSliceable) return;
+                
+                var newKitchenObj = _player.MyKitchenObject;
+                _player.PickKitchenObject(_myKitchenObj);
+                _myKitchenObj = newKitchenObj;
+                PutKitchenObjToPos();
             }
             else
             {
@@ -66,18 +67,14 @@ public class CuttingCounter : Counter
     public override void InteractAlternate()
     {
         if (_myKitchenObj == null) return;
-        _myKitchenObj.Slice();
-    }
-
-    public void Slice()
-    {
+        
         if (_myKitchenObj.IsSliceable)
         {
             _myKitchenObj.Slice();
         }
         else
         {
-            Debug.LogError("system shouldn't allow call slice function on non-sliceable kitchen objects");
+            Debug.LogError("system shouldn't allow call slice function on non-sliceable kitchen objects. because system shouldn't allow put non slice-able object in the cutting counter");
         }
     }
 
