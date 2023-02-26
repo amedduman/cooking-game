@@ -17,6 +17,11 @@ public abstract class Counter : MonoBehaviour, IInteractable
 
     public abstract void Interact();
 
+    public virtual void InteractAlternate()
+    {
+        
+    }
+
     public void Highlight()
     {
         if(_highlightCoroutine != null)
@@ -31,5 +36,5 @@ public abstract class Counter : MonoBehaviour, IInteractable
         _selectedCounterVisual.SetActive(false);
     }
 
-    public abstract bool IsCounterAvailableToInteract(Player player);
+    // public abstract bool IsCounterAvailableToInteract(Player player);
 }

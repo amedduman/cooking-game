@@ -6,40 +6,50 @@ using UnityEngine;
 public class CuttingCounter : Counter
 {
     KitchenObject _myKitchenObj;
-    
+
     public override void Interact()
     {
         if (_myKitchenObj == null)
         {
-            _myKitchenObj = _player.DropKitchenObject();
+            var takenKitchenObj = _player.DropKitchenObject();
+            if (takenKitchenObj == null) return;
+            if (!takenKitchenObj.IsSliceable) return;
+            _myKitchenObj = takenKitchenObj;
             PutKitchenObjToPos();
+            return;
+        }
+        
+        
+        
+        if (_myKitchenObj.IsSliced)
+        {
+            if (_player.MyKitchenObject != null)
+            {
+                if (_player.MyKitchenObject.IsSliceable)
+                {
+                    var newKitchenObj = _player.MyKitchenObject;
+                    _player.PickKitchenObject(_myKitchenObj);
+                    _myKitchenObj = newKitchenObj;
+                    PutKitchenObjToPos();
+                }
+            }
+            else
+            {
+                _player.PickKitchenObject(_myKitchenObj);
+                _myKitchenObj = null;
+            }
+                
         }
         else
         {
-            Debug.Log("log");
-
-            if (_myKitchenObj.IsSliced)
+            if (_myKitchenObj.CurrentHitCount == 0)
             {
-                if (_player.MyKitchenObject != null)
-                {
-                    if (_player.MyKitchenObject.IsSliceable)
-                    {
-                        var newKitchenObj = _player.MyKitchenObject;
-                        _player.PickKitchenObject(_myKitchenObj);
-                        _myKitchenObj = newKitchenObj;
-                        PutKitchenObjToPos();
-                    }
-                }
-                else
+                if (_player.MyKitchenObject == null)
                 {
                     _player.PickKitchenObject(_myKitchenObj);
                     _myKitchenObj = null;
                 }
-                
-            }
-            else
-            {
-                if (_myKitchenObj.CurrentHitCount == 0)
+                else
                 {
                     if (_player.MyKitchenObject.IsSliceable)
                     {
@@ -53,9 +63,14 @@ public class CuttingCounter : Counter
         }
     }
 
-    public void Slice()
+    public override void InteractAlternate()
     {
         if (_myKitchenObj == null) return;
+        _myKitchenObj.Slice();
+    }
+
+    public void Slice()
+    {
         if (_myKitchenObj.IsSliceable)
         {
             _myKitchenObj.Slice();
@@ -66,44 +81,44 @@ public class CuttingCounter : Counter
         }
     }
 
-    public override bool IsCounterAvailableToInteract(Player player)
-    {
-        if (_player.MyKitchenObject == null)
-        {
-            if (_myKitchenObj != null)
-            {
-                if (_myKitchenObj.IsSliced)
-                {
-                    return true;
-                }
-
-                return false;
-            }
-
-            return false;
-        }
-        else
-        {
-            if (_player.MyKitchenObject.IsSliceable)
-            {
-                if (_myKitchenObj == null)
-                {
-                    return true;
-                }
-                else
-                {
-                    if (_myKitchenObj.IsSliced)
-                    {
-                        return true;
-                    }
-
-                    return false;
-                }
-            }
-
-            return false;
-        }
-    }
+    // public override bool IsCounterAvailableToInteract(Player player)
+    // {
+    //     if (_player.MyKitchenObject == null)
+    //     {
+    //         if (_myKitchenObj != null)
+    //         {
+    //             if (_myKitchenObj.IsSliced)
+    //             {
+    //                 return true;
+    //             }
+    //
+    //             return false;
+    //         }
+    //
+    //         return false;
+    //     }
+    //     else
+    //     {
+    //         if (_player.MyKitchenObject.IsSliceable)
+    //         {
+    //             if (_myKitchenObj == null)
+    //             {
+    //                 return true;
+    //             }
+    //             else
+    //             {
+    //                 if (_myKitchenObj.IsSliced)
+    //                 {
+    //                     return true;
+    //                 }
+    //
+    //                 return false;
+    //             }
+    //         }
+    //
+    //         return false;
+    //     }
+    // }
     
     void PutKitchenObjToPos()
     {

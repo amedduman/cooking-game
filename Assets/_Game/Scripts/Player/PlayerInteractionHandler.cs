@@ -12,7 +12,7 @@ public class PlayerInteractionHandler : MonoBehaviour
     LayerMask _counterLayerMask;
     Transform _tr;
     bool _hasInteractButtonPressed;
-    bool _hasInteractAlternateButtonPressed;
+    public bool _hasInteractAlternateButtonPressed;
     
     void Awake()
     {
@@ -63,26 +63,29 @@ public class PlayerInteractionHandler : MonoBehaviour
             if (hitInfo.transform.TryGetComponent(out Counter counter))
             {
                 counter.Highlight();
-
-                if (_hasInteractAlternateButtonPressed)
-                {
-                    if (_player.MyKitchenObject != null) return; // if player hold something cant interact with cutting counter
-                    if (counter.TryGetComponent(out CuttingCounter cuttingCounter))
-                    {
-                        cuttingCounter.Slice();
-                    }
-
-                    _hasInteractAlternateButtonPressed = false;
-                }
                 
-                if (!_hasInteractButtonPressed) return;
-
-                if (!counter.IsCounterAvailableToInteract(_player)) return;
+                if (_hasInteractButtonPressed)
+                    counter.Interact();
                 
-                counter.Interact();
+                if(_hasInteractAlternateButtonPressed)
+                    counter.InteractAlternate();
+
+                // if (_hasInteractAlternateButtonPressed)
+                // {
+                //     if (_player.MyKitchenObject != null) return; // if player hold something cant interact with cutting counter
+                //     if (counter.TryGetComponent(out CuttingCounter cuttingCounter))
+                //     {
+                //         cuttingCounter.Slice();
+                //     }
+                //
+                //     _hasInteractAlternateButtonPressed = false;
+                // }
+
+                // if (!counter.IsCounterAvailableToInteract(_player)) return;
             }
         }
 
         _hasInteractButtonPressed = false;
+        _hasInteractAlternateButtonPressed = false;
     }        
 }

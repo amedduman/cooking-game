@@ -32,10 +32,10 @@ public class EmptyCounter : Counter
         }
     }
 
-    public override bool IsCounterAvailableToInteract(Player player)
-    {
-        return true;
-    }
+    // public override bool IsCounterAvailableToInteract(Player player)
+    // {
+    //     return true;
+    // }
 
     void PutKitchenObjToPos()
     {

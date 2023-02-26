@@ -10,23 +10,24 @@ public class ContainerCounter : Counter
     
     public override void Interact()
     {
+        if (_player.MyKitchenObject != null) return;
         _animator.SetTrigger("OpenClose");
         var kitchenObject = Instantiate(_kitchenObjectSO.Prefab, _kitchenObjectPoint.position, Quaternion.identity);
         _player.PickKitchenObject(kitchenObject);
     }
 
-    public override bool IsCounterAvailableToInteract(Player player)
-    {
-        // don't allow player to interact with container counter if player has an item in its hands
-        if (player.MyKitchenObject != null)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
+    // public override bool IsCounterAvailableToInteract(Player player)
+    // {
+    //     // don't allow player to interact with container counter if player has an item in its hands
+    //     if (player.MyKitchenObject != null)
+    //     {
+    //         return false;
+    //     }
+    //     else
+    //     {
+    //         return true;
+    //     }
+    // }
 
     void OnValidate()
     {
