@@ -66,10 +66,9 @@ public class PlayerInteractionHandler : MonoBehaviour
 
                 if (_hasInteractAlternateButtonPressed)
                 {
-                    Debug.Log("button pressed");
+                    if (_player.MyKitchenObject != null) return; // if player hold something cant interact with cutting counter
                     if (counter.TryGetComponent(out CuttingCounter cuttingCounter))
                     {
-                        Debug.Log("called slice");
                         cuttingCounter.Slice();
                     }
 

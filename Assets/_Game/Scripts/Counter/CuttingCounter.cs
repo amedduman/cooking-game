@@ -16,16 +16,46 @@ public class CuttingCounter : Counter
         }
         else
         {
+            Debug.Log("log");
+
             if (_myKitchenObj.IsSliced)
             {
-                _player.PickKitchenObject(_myKitchenObj);
-                _myKitchenObj = null;
+                if (_player.MyKitchenObject != null)
+                {
+                    if (_player.MyKitchenObject.IsSliceable)
+                    {
+                        var newKitchenObj = _player.MyKitchenObject;
+                        _player.PickKitchenObject(_myKitchenObj);
+                        _myKitchenObj = newKitchenObj;
+                        PutKitchenObjToPos();
+                    }
+                }
+                else
+                {
+                    _player.PickKitchenObject(_myKitchenObj);
+                    _myKitchenObj = null;
+                }
+                
+            }
+            else
+            {
+                if (_myKitchenObj.CurrentHitCount == 0)
+                {
+                    if (_player.MyKitchenObject.IsSliceable)
+                    {
+                        var newKitchenObj = _player.MyKitchenObject;
+                        _player.PickKitchenObject(_myKitchenObj);
+                        _myKitchenObj = newKitchenObj;
+                        PutKitchenObjToPos();
+                    }
+                }
             }
         }
     }
 
     public void Slice()
     {
+        if (_myKitchenObj == null) return;
         if (_myKitchenObj.IsSliceable)
         {
             _myKitchenObj.Slice();
