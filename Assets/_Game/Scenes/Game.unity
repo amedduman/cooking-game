@@ -279,6 +279,75 @@ PrefabInstance:
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27f5c316ee36d4285aaeaba85c87954a, type: 3}
+--- !u!1001 &194035167
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1850618748958687827, guid: 674d8b2b4fdc84fbebadb502a901060a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1850618748958687827, guid: 674d8b2b4fdc84fbebadb502a901060a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1850618748958687827, guid: 674d8b2b4fdc84fbebadb502a901060a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1850618748958687827, guid: 674d8b2b4fdc84fbebadb502a901060a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1850618748958687827, guid: 674d8b2b4fdc84fbebadb502a901060a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1850618748958687827, guid: 674d8b2b4fdc84fbebadb502a901060a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1850618748958687827, guid: 674d8b2b4fdc84fbebadb502a901060a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1850618748958687827, guid: 674d8b2b4fdc84fbebadb502a901060a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1850618748958687827, guid: 674d8b2b4fdc84fbebadb502a901060a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1850618748958687827, guid: 674d8b2b4fdc84fbebadb502a901060a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1850618748958687827, guid: 674d8b2b4fdc84fbebadb502a901060a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8036049156532420871, guid: 674d8b2b4fdc84fbebadb502a901060a,
+        type: 3}
+      propertyPath: m_Name
+      value: CuttingCounter
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 674d8b2b4fdc84fbebadb502a901060a, type: 3}
 --- !u!95 &282167708 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 717824619213624103, guid: 64de3704ece4f46c3bf65601b3aad778,

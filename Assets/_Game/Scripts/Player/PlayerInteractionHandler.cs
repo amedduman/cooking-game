@@ -12,6 +12,7 @@ public class PlayerInteractionHandler : MonoBehaviour
     LayerMask _counterLayerMask;
     Transform _tr;
     bool _hasInteractButtonPressed;
+    bool _hasInteractAlternateButtonPressed;
     
     void Awake()
     {
@@ -23,11 +24,13 @@ public class PlayerInteractionHandler : MonoBehaviour
     void OnEnable()
     {
         _inputHandler.OnInteractButtonPressed += HandleInteractButtonPressed;
+        _inputHandler.OnInteractAlternateButtonPressed += HandleInteractAlternateButtonPressed;
     }
 
     void OnDisable()
     {
         _inputHandler.OnInteractButtonPressed -= HandleInteractButtonPressed;
+        _inputHandler.OnInteractAlternateButtonPressed -= HandleInteractAlternateButtonPressed;
     }
 
     void Update()
@@ -38,6 +41,11 @@ public class PlayerInteractionHandler : MonoBehaviour
     void HandleInteractButtonPressed()
     {
         _hasInteractButtonPressed = true;
+    }
+    
+    void HandleInteractAlternateButtonPressed()
+    {
+        _hasInteractAlternateButtonPressed = true;
     }
 
     void Interact()
@@ -55,6 +63,18 @@ public class PlayerInteractionHandler : MonoBehaviour
             if (hitInfo.transform.TryGetComponent(out Counter counter))
             {
                 counter.Highlight();
+
+                if (_hasInteractAlternateButtonPressed)
+                {
+                    Debug.Log("button pressed");
+                    if (counter.TryGetComponent(out CuttingCounter cuttingCounter))
+                    {
+                        Debug.Log("called slice");
+                        cuttingCounter.Slice();
+                    }
+
+                    _hasInteractAlternateButtonPressed = false;
+                }
                 
                 if (!_hasInteractButtonPressed) return;
 
