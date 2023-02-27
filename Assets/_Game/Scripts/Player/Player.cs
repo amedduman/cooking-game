@@ -55,6 +55,12 @@ public class Player : MonoBehaviour
         return kitchenObj;
     }
 
+    public void DestroyHoldingKitchenObject()
+    {
+        if (MyKitchenObject != null)
+            Destroy(MyKitchenObject.gameObject);
+    }
+
     void PutKitchenObjectToPos()
     {
         MyKitchenObject.transform.parent = _kitchenObjectPos;
