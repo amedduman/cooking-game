@@ -29,4 +29,9 @@ public class ProgressBar : MonoBehaviour
     {
         _barImg.DOFillAmount(fillAmount, .1f);   
     }
+
+    public void ChangeBarColor(Color color)
+    {
+        _barImg.color = color;
+    }
 }

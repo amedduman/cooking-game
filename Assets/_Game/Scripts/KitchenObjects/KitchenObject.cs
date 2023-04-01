@@ -79,4 +79,10 @@ public class KitchenObject : MonoBehaviour
     }
 
     #endregion
+
+    #region PlateLogic
+
+    [SerializeField] bool IsPlate = false;
+
+    #endregion
 }
