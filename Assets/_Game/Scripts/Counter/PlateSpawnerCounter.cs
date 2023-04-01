@@ -10,7 +10,7 @@ public class PlateSpawnerCounter : Counter
     [SerializeField] float _plateThickness = 1;
     float _plateSpawnTimer;
     Coroutine _plateSpawnCoroutine;
-    int _plateCount;
+    Stack<KitchenObject> _plates = new Stack<KitchenObject>();
 
     private void Start()
     {
@@ -26,13 +26,13 @@ public class PlateSpawnerCounter : Counter
             _plateSpawnTimer += Time.deltaTime;
             if (_plateSpawnTimer > _plateSpawnInterval)
             {
-                if (_plateCount < _maxPlateCount)
+                if (_plates.Count < _maxPlateCount)
                 {
-                    Instantiate(_platePrefab, _kitchenObjectPoint.position, Quaternion.identity, transform);
-                    _plateCount++;
+                    var plate = Instantiate(_platePrefab, _kitchenObjectPoint.position, Quaternion.identity, transform);
+                    _plates.Push(plate);
                     var pos = _kitchenObjectPoint.position;
-                    pos.y += _plateThickness;
-                    _kitchenObjectPoint.position = pos;
+                    pos.y += _plateThickness * _plates.Count;
+                    plate.transform.position = pos;
                     _plateSpawnTimer = 0;
                 }
             }
@@ -41,6 +41,8 @@ public class PlateSpawnerCounter : Counter
 
     public override void Interact()
     {
-        
+        if (_plates.Count < 1) return;
+        if (_player.MyKitchenObject != null) return;
+        _player.PickKitchenObject(_plates.Pop());
     }
 }
