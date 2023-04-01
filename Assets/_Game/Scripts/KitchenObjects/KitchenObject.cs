@@ -49,7 +49,7 @@ public class KitchenObject : MonoBehaviour
     public GameObject RawVisual;
     public GameObject CookedVisual;
     public GameObject BurnedVisual;
-    public float CurentTimeOnStove = 0;
+    public float CurrentTimeOnStove = 0;
 
     public void ChangeVisual()
     {

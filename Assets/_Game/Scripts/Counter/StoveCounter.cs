@@ -6,6 +6,13 @@ public class StoveCounter : Counter
 {
     KitchenObject _myKitchenObj;
     Coroutine _cookingTimerCoroutine;
+    [SerializeField] ProgressBar _progressBar;
+
+    void Start()
+    {
+        _progressBar.UpdateProgressBar(0);
+        _progressBar.Hide();
+    }
 
     public override void Interact()
     {
@@ -46,19 +53,36 @@ public class StoveCounter : Counter
     {
         while (true)
         {
-            _myKitchenObj.CurentTimeOnStove += Time.deltaTime;
+            _myKitchenObj.CurrentTimeOnStove += Time.deltaTime;
             yield return null;
-            Debug.Log("cooking time is " + _myKitchenObj.CurentTimeOnStove);
-            if(_myKitchenObj.CurentTimeOnStove > _myKitchenObj.TimeToCook)
+            UpdateProgressBar();
+            Debug.Log("cooking time is " + _myKitchenObj.CurrentTimeOnStove);
+            if(_myKitchenObj.CurrentTimeOnStove > _myKitchenObj.TimeToCook)
             {
                 _myKitchenObj.MyCookingState = KitchenObject.cookingState.Cooked;
                 _myKitchenObj.ChangeVisual();
             }
-            if(_myKitchenObj.CurentTimeOnStove > _myKitchenObj.TimeToCook + _myKitchenObj.TimeToBurn)
+            if(_myKitchenObj.CurrentTimeOnStove > _myKitchenObj.TimeToCook + _myKitchenObj.TimeToBurn)
             {
                 _myKitchenObj.MyCookingState = KitchenObject.cookingState.Burned;
                 _myKitchenObj.ChangeVisual();
             }
+        }
+    }
+
+    void UpdateProgressBar()
+    {
+        if (_myKitchenObj == null) return;
+
+        float fillAmount = _myKitchenObj.CurrentTimeOnStove / _myKitchenObj.TimeToCook;
+        if(fillAmount < 1)
+        {
+            _progressBar.Show();
+            _progressBar.UpdateProgressBar(fillAmount);
+        }
+        else
+        {
+            _progressBar.Hide();
         }
     }
 }
