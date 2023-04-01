@@ -1,10 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using DG.Tweening;
-using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class KitchenObject : MonoBehaviour
 {
@@ -41,29 +36,45 @@ public class KitchenObject : MonoBehaviour
     public enum cookingState
     {
         Raw,
+        Cooking,
         Cooked,
         Burned,
     }
     
     [field:SerializeField] public bool IsCookable { get; private set; }
     
-    [field: SerializeField] public float TimeToFry { get; private set; } = 3;
+    [field: SerializeField] public float TimeToCook { get; private set; } = 3;
     [field: SerializeField] public float TimeToBurn { get; private set; } = 3;
-    public cookingState MyCookingState { get; private set; } = cookingState.Raw; 
-    float _curentTimeOnStove = 0;
-    public void Cook()
+    public cookingState MyCookingState { get; set; } = cookingState.Raw;
+    public GameObject RawVisual;
+    public GameObject CookedVisual;
+    public GameObject BurnedVisual;
+    public float CurentTimeOnStove = 0;
+
+    public void ChangeVisual()
     {
         switch (MyCookingState)
         {
             case cookingState.Raw:
-                
+                CookedVisual.gameObject.SetActive(false);
+                BurnedVisual.gameObject.SetActive(false);
+                break;
+            case cookingState.Cooking:
+                CookedVisual.gameObject.SetActive(false);
+                BurnedVisual.gameObject.SetActive(false);
                 break;
             case cookingState.Cooked:
+                RawVisual.gameObject.SetActive(false);
+                CookedVisual.gameObject.SetActive(true);
+                BurnedVisual.gameObject.SetActive(false);
                 break;
             case cookingState.Burned:
+                RawVisual.gameObject.SetActive(false);
+                CookedVisual.gameObject.SetActive(false);
+                BurnedVisual.gameObject.SetActive(true);
                 break;
             default:
-                throw new ArgumentOutOfRangeException();
+                break;
         }
     }
 
