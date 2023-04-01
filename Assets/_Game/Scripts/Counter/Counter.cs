@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public abstract class Counter : MonoBehaviour, IInteractable
@@ -34,5 +35,11 @@ public abstract class Counter : MonoBehaviour, IInteractable
     {
         yield return new WaitForEndOfFrame();
         _selectedCounterVisual.SetActive(false);
+    }
+
+    protected void PutKitchenObjToPos(KitchenObject myKitchenObj)
+    {
+        myKitchenObj.transform.parent = _kitchenObjectPoint;
+        myKitchenObj.transform.DOLocalMove(Vector3.zero, .2f);
     }
 }

@@ -67,6 +67,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MeatPattyUncooked
       objectReference: {fileID: 0}
+    - target: {fileID: 7490382471517421050, guid: a04c11099e476490298c9b9460126b28,
+        type: 3}
+      propertyPath: <IsCookable>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a04c11099e476490298c9b9460126b28, type: 3}
 --- !u!4 &2243003233734060425 stripped

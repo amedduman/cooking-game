@@ -28,7 +28,7 @@ public class CuttingCounter : Counter
 
             var takenKitchenObj = _player.DropKitchenObject();
             _myKitchenObj = takenKitchenObj;
-            PutKitchenObjToPos();
+            PutKitchenObjToPos(_myKitchenObj);
             
             return;
         }
@@ -43,7 +43,7 @@ public class CuttingCounter : Counter
                 var newKitchenObj = _player.MyKitchenObject;
                 _player.PickKitchenObject(_myKitchenObj);
                 _myKitchenObj = newKitchenObj;
-                PutKitchenObjToPos();
+                PutKitchenObjToPos(_myKitchenObj);
             }
             else
             {
@@ -68,7 +68,7 @@ public class CuttingCounter : Counter
                         var newKitchenObj = _player.MyKitchenObject;
                         _player.PickKitchenObject(_myKitchenObj);
                         _myKitchenObj = newKitchenObj;
-                        PutKitchenObjToPos();
+                        PutKitchenObjToPos(_myKitchenObj);
                     }
                 }
             }
@@ -101,9 +101,5 @@ public class CuttingCounter : Counter
             _progressBar.transform.parent.gameObject.SetActive(false);
     }
 
-    void PutKitchenObjToPos()
-    {
-        _myKitchenObj.transform.parent = _kitchenObjectPoint;
-        _myKitchenObj.transform.DOLocalMove(Vector3.zero, .2f);
-    }
+    
 }
