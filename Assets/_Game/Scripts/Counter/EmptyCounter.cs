@@ -14,31 +14,42 @@ public class EmptyCounter : Counter
         {
             if (_myKitchenObj.IsPlate)
             {
-                if (_player.MyKitchenObject == null) return;
-                var result = _myKitchenObj.MyRecipe.TryToAddIngredient(_player.MyKitchenObject);
-                if (result)
+                if (_player.MyKitchenObject != null)
                 {
-                    _player.ResetPlayerHoldingObject();
+                    var result = _myKitchenObj.MyRecipe.TryToAddIngredient(_player.MyKitchenObject);
+                    if (result)
+                    {
+                        _player.ResetPlayerHoldingObject();
+                    }
+                }
+                else
+                {
+                    SwitchObj();
                 }
             }
             else
             {
-                var returnedKitchenObj = _player.PickKitchenObject(_myKitchenObj);
-                if (returnedKitchenObj == null)
-                {
-                    _myKitchenObj = null;
-                }
-                else
-                {
-                    _myKitchenObj = returnedKitchenObj;
-                    PutKitchenObjToPos();
-                }
+                SwitchObj();   
             }
         }
         else
         {
             var returnedKitchenObj = _player.DropKitchenObject();
             if (returnedKitchenObj == null) return;
+            _myKitchenObj = returnedKitchenObj;
+            PutKitchenObjToPos();
+        }
+    }
+
+    void SwitchObj()
+    {
+        var returnedKitchenObj = _player.PickKitchenObject(_myKitchenObj);
+        if (returnedKitchenObj == null)
+        {
+            _myKitchenObj = null;
+        }
+        else
+        {
             _myKitchenObj = returnedKitchenObj;
             PutKitchenObjToPos();
         }
