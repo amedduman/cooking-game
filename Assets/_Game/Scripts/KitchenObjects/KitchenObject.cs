@@ -45,7 +45,9 @@ public class KitchenObject : MonoBehaviour
         Cooked,
         Burned,
     }
-    
+
+    [SerializeField] KitchenObjectSO _cookedSO;
+    [SerializeField] KitchenObjectSO _burnedSO;
     [field:SerializeField] public bool IsCookable { get; private set; }
     
     [field: SerializeField] public float TimeToCook { get; private set; } = 3;
@@ -72,11 +74,13 @@ public class KitchenObject : MonoBehaviour
                 RawVisual.gameObject.SetActive(false);
                 CookedVisual.gameObject.SetActive(true);
                 BurnedVisual.gameObject.SetActive(false);
+                MyKitchenObjSo = _cookedSO;
                 break;
             case cookingState.Burned:
                 RawVisual.gameObject.SetActive(false);
                 CookedVisual.gameObject.SetActive(false);
                 BurnedVisual.gameObject.SetActive(true);
+                MyKitchenObjSo = _burnedSO;
                 break;
             default:
                 break;

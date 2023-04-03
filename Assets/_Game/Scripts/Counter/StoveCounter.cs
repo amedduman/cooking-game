@@ -56,7 +56,6 @@ public class StoveCounter : Counter
             _myKitchenObj.CurrentTimeOnStove += Time.deltaTime;
             yield return null;
             UpdateProgressBar();
-            Debug.Log("cooking time is " + _myKitchenObj.CurrentTimeOnStove);
             if(_myKitchenObj.CurrentTimeOnStove > _myKitchenObj.TimeToCook)
             {
                 _myKitchenObj.MyCookingState = KitchenObject.cookingState.Cooked;

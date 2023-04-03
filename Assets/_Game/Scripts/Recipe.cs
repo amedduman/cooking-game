@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Recipe : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class Recipe : MonoBehaviour
                 if (RecepieVisualInfoList[i].IsAdded == false)
                 {
                     RecepieVisualInfoList[i].Visual.SetActive(true);
+                    RecepieVisualInfoList[i].IconBg.color = Color.green;
                     RecepieVisualInfoList[i].IsAdded = true;
                     return true;
                 }
@@ -28,6 +30,9 @@ public class Recipe : MonoBehaviour
             if(kitchenObj.MyKitchenObjSo == RecepieVisualInfoList[i].FailedVersion)
             {
                 RecepieVisualInfoList[i].FailedVersionVisual.SetActive(true);
+                RecepieVisualInfoList[i].Icon.gameObject.SetActive(false);
+                RecepieVisualInfoList[i].FailedVersionIcon.gameObject.SetActive(true);
+                RecepieVisualInfoList[i].IconBg.color = Color.red;
                 RecepieVisualInfoList[i].IsAdded = true;
                 MyCompletionStatus.IsFaulty = true;
                 return true;
@@ -65,10 +70,13 @@ struct RecepieVisualInfo
 {
     public KitchenObjectSO MyKitchenObjSO;
     public GameObject Visual;
+    public Image Icon;
+    public Image IconBg;
     [HideInInspector] public bool IsAdded;
     public bool CanBeFailed;
     [ShowIf(nameof(CanBeFailed), true)] public KitchenObjectSO FailedVersion;
     [ShowIf(nameof(CanBeFailed), true)] public GameObject FailedVersionVisual;
+    [ShowIf(nameof(CanBeFailed), true)] public Image FailedVersionIcon;  
 
 }
 

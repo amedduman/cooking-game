@@ -69,6 +69,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7490382471517421050, guid: a04c11099e476490298c9b9460126b28,
         type: 3}
+      propertyPath: _slicedSO
+      value: 
+      objectReference: {fileID: 11400000, guid: f66d1fc71d7e04601a69c364453b9a43,
+        type: 2}
+    - target: {fileID: 7490382471517421050, guid: a04c11099e476490298c9b9460126b28,
+        type: 3}
+      propertyPath: IsIngredient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490382471517421050, guid: a04c11099e476490298c9b9460126b28,
+        type: 3}
       propertyPath: _normalVisual
       value: 
       objectReference: {fileID: 7065745484075184842}
