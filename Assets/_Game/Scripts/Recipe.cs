@@ -8,6 +8,7 @@ public class Recipe : MonoBehaviour
 
     public bool TryToAddIngredient(KitchenObject kitchenObj)
     {
+
         if (kitchenObj.IsIngredient == false) return false;
         //foreach (var recepieVisualInfo in RecepieVisualInfoList)
         //{
@@ -42,10 +43,8 @@ struct RecepieVisualInfo
 {
     public KitchenObjectSO MyKitchenObjSO;
     public GameObject Visual;
-    public bool IsAdded;
+    [HideInInspector] public bool IsAdded;
+    public bool CanFail;
+    [ShowIf(nameof(CanFail), true)] public bool IsThisFailedVersion;
 
-    public void SetIsAdded(bool val)
-    {
-        IsAdded = val;
-    }
 }

@@ -48,10 +48,29 @@ MonoBehaviour:
   RecepieVisualInfoList:
   - MyKitchenObjSO: {fileID: 11400000, guid: 583ff7d20321142aaad65c3d809ed1a1, type: 2}
     Visual: {fileID: 8728588181705130412}
+    IsAdded: 0
+    CanFail: 0
+    IsThisFailedVersion: 0
   - MyKitchenObjSO: {fileID: 11400000, guid: f6aa58a1008c0474aa543e62ef2996f7, type: 2}
     Visual: {fileID: 8728588183171642720}
-  - MyKitchenObjSO: {fileID: 11400000, guid: 383c112fa6ed4433a958cc804e84d762, type: 2}
+    IsAdded: 0
+    CanFail: 0
+    IsThisFailedVersion: 0
+  - MyKitchenObjSO: {fileID: 11400000, guid: dccbb63ccb2bc45488475d125a9e8f30, type: 2}
     Visual: {fileID: 8728588183399887540}
+    IsAdded: 0
+    CanFail: 0
+    IsThisFailedVersion: 0
+  - MyKitchenObjSO: {fileID: 11400000, guid: d4a963ce3ae814d9babc2f61ee45cfbf, type: 2}
+    Visual: {fileID: 8728588182496463202}
+    IsAdded: 0
+    CanFail: 1
+    IsThisFailedVersion: 0
+  - MyKitchenObjSO: {fileID: 11400000, guid: 201e4ec91335e4b59a7b007226a5642c, type: 2}
+    Visual: {fileID: 8825182896877008702}
+    IsAdded: 0
+    CanFail: 1
+    IsThisFailedVersion: 1
 --- !u!1001 &5216444903121923775
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -163,6 +182,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5216444903121923775}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8728588182496463202 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3550707552375629789, guid: 10e39c981f2de6441b54efde32ced8f0,
+    type: 3}
+  m_PrefabInstance: {fileID: 5216444903121923775}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8728588183171642720 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3550707550894988255, guid: 10e39c981f2de6441b54efde32ced8f0,
@@ -172,6 +197,12 @@ GameObject:
 --- !u!1 &8728588183399887540 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3550707551136013323, guid: 10e39c981f2de6441b54efde32ced8f0,
+    type: 3}
+  m_PrefabInstance: {fileID: 5216444903121923775}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8825182896877008702 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3611271270719445377, guid: 10e39c981f2de6441b54efde32ced8f0,
     type: 3}
   m_PrefabInstance: {fileID: 5216444903121923775}
   m_PrefabAsset: {fileID: 0}
