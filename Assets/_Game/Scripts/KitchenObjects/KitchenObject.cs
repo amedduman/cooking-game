@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class KitchenObject : MonoBehaviour
 {
+    public bool IsIngredient;
+    public KitchenObjectSO MyKitchenObjSo;
+
     #region SliceLogic
 
     [field:SerializeField] public bool IsSliceable { get; private set; }
@@ -83,6 +86,7 @@ public class KitchenObject : MonoBehaviour
     #region PlateLogic
 
     public bool IsPlate = false;
-
+    public Recepie MyRecepie;
+    
     #endregion
 }

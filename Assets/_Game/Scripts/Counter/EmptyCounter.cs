@@ -12,15 +12,22 @@ public class EmptyCounter : Counter
     {
         if (_myKitchenObj != null)
         {
-            var returnedKitchenObj = _player.PickKitchenObject(_myKitchenObj);
-            if (returnedKitchenObj == null)
+            if (_myKitchenObj.IsPlate)
             {
-                _myKitchenObj = null;
+                _myKitchenObj.MyRecepie.TryToAddIngredient(_player.MyKitchenObject);
             }
             else
             {
-                _myKitchenObj = returnedKitchenObj;
-                PutKitchenObjToPos();
+                var returnedKitchenObj = _player.PickKitchenObject(_myKitchenObj);
+                if (returnedKitchenObj == null)
+                {
+                    _myKitchenObj = null;
+                }
+                else
+                {
+                    _myKitchenObj = returnedKitchenObj;
+                    PutKitchenObjToPos();
+                }
             }
         }
         else
