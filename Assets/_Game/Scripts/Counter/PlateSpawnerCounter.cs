@@ -43,6 +43,8 @@ public class PlateSpawnerCounter : Counter
     {
         if (_plates.Count < 1) return;
         if (_player.MyKitchenObject != null) return;
-        _player.PickKitchenObject(_plates.Pop());
+        var plate = _plates.Pop();
+        plate.InstantiateRecipe();
+        _player.PickKitchenObject(plate);
     }
 }

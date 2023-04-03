@@ -48,7 +48,7 @@ MonoBehaviour:
   RecepieVisualInfoList:
   - MyKitchenObjSO: {fileID: 11400000, guid: 583ff7d20321142aaad65c3d809ed1a1, type: 2}
     Visual: {fileID: 8728588181705130412}
-  - MyKitchenObjSO: {fileID: 11400000, guid: e06f6cf86d4ed42d48ef56ee0894a6ff, type: 2}
+  - MyKitchenObjSO: {fileID: 11400000, guid: f6aa58a1008c0474aa543e62ef2996f7, type: 2}
     Visual: {fileID: 8728588183171642720}
   - MyKitchenObjSO: {fileID: 11400000, guid: 383c112fa6ed4433a958cc804e84d762, type: 2}
     Visual: {fileID: 8728588183399887540}

@@ -17,6 +17,7 @@ public class KitchenObject : MonoBehaviour
     public bool IsSliced { get; private set; }
     [SerializeField] GameObject _normalVisual;
     [SerializeField] GameObject _slicedVisual;
+    [SerializeField] KitchenObjectSO _slicedSO;
     
     public void Slice()
     {
@@ -29,6 +30,7 @@ public class KitchenObject : MonoBehaviour
             _normalVisual.SetActive(false);
             _slicedVisual.SetActive(true);
             IsSliced = true;
+            MyKitchenObjSo = _slicedSO;
         }
     }
 
@@ -86,7 +88,14 @@ public class KitchenObject : MonoBehaviour
     #region PlateLogic
 
     public bool IsPlate = false;
-    public Recepie MyRecepie;
+    [HideInInspector] public Recipe MyRecipe;
+    [SerializeField] Recipe MyRecipePrefab;
+    
+
+    public void InstantiateRecipe()
+    {
+        MyRecipe = Instantiate(MyRecipePrefab, transform.position, Quaternion.identity, transform);
+    }
     
     #endregion
 }

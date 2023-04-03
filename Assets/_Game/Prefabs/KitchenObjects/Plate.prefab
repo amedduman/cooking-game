@@ -147,6 +147,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5604476054184606673, guid: 0a404a5728cee4d1b8f4325fbca445b3,
         type: 3}
+    - target: {fileID: 7490382471517421050, guid: a04c11099e476490298c9b9460126b28,
+        type: 3}
+      propertyPath: MyRecipePrefab
+      value: 
+      objectReference: {fileID: 5604476054184606673, guid: 0a404a5728cee4d1b8f4325fbca445b3,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a04c11099e476490298c9b9460126b28, type: 3}
 --- !u!4 &8895915069190526720 stripped
