@@ -67,6 +67,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bread
       objectReference: {fileID: 0}
+    - target: {fileID: 7490382471517421050, guid: a04c11099e476490298c9b9460126b28,
+        type: 3}
+      propertyPath: IsIngredient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490382471517421050, guid: a04c11099e476490298c9b9460126b28,
+        type: 3}
+      propertyPath: MyKitchenObjSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 583ff7d20321142aaad65c3d809ed1a1,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a04c11099e476490298c9b9460126b28, type: 3}
 --- !u!4 &2243003233734060425 stripped

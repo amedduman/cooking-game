@@ -29,6 +29,14 @@ public class Player : MonoBehaviour
         _animator.SetBool(walking, isWalking);
     }
 
+    public void ResetPlayerHoldingObject()
+    {
+        if (MyKitchenObject != null)
+        {
+            Destroy(MyKitchenObject.gameObject);
+        }
+    }
+
     [CanBeNull]
     public KitchenObject PickKitchenObject(KitchenObject kitchenObject)
     {

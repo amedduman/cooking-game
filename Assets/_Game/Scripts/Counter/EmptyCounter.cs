@@ -14,7 +14,11 @@ public class EmptyCounter : Counter
         {
             if (_myKitchenObj.IsPlate)
             {
-                _myKitchenObj.MyRecipe.TryToAddIngredient(_player.MyKitchenObject);
+                var result = _myKitchenObj.MyRecipe.TryToAddIngredient(_player.MyKitchenObject);
+                if (result)
+                {
+                    _player.ResetPlayerHoldingObject();
+                }
             }
             else
             {
