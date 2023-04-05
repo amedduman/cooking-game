@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Recipe : MonoBehaviour
 {
+    public String RecipeName;
     public CompletionStatus MyCompletionStatus;
     [SerializeField] RecepieVisualInfo[] RecepieVisualInfoList;
 

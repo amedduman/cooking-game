@@ -602,7 +602,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bee24f07c57157e45a946eed3bfe8b84, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 549cb4f2b86d1b84d8cd41c1cfde26c8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -623,7 +623,7 @@ GameObject:
   - component: {fileID: 7462704725787537060}
   - component: {fileID: 5604476054184606673}
   m_Layer: 0
-  m_Name: Burger
+  m_Name: CheeseBurger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -658,7 +658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffef28f630d8c4c158294e358e427bb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RecipeName: Buger
+  RecipeName: Cheese Burger
   RecepieVisualInfoList:
   - MyKitchenObjSO: {fileID: 11400000, guid: 583ff7d20321142aaad65c3d809ed1a1, type: 2}
     Visual: {fileID: 8728588181705130412}
@@ -669,8 +669,8 @@ MonoBehaviour:
     FailedVersion: {fileID: 0}
     FailedVersionVisual: {fileID: 0}
     FailedVersionIcon: {fileID: 0}
-  - MyKitchenObjSO: {fileID: 11400000, guid: f66d1fc71d7e04601a69c364453b9a43, type: 2}
-    Visual: {fileID: 8728588182508298030}
+  - MyKitchenObjSO: {fileID: 11400000, guid: f6aa58a1008c0474aa543e62ef2996f7, type: 2}
+    Visual: {fileID: 8728588183171642720}
     Icon: {fileID: 7348389981948384956}
     IconBg: {fileID: 2212087159686749316}
     IsAdded: 0
@@ -891,9 +891,9 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5216444903121923775}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8728588182508298030 stripped
+--- !u!1 &8728588183171642720 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 3550707552397226385, guid: 10e39c981f2de6441b54efde32ced8f0,
+  m_CorrespondingSourceObject: {fileID: 3550707550894988255, guid: 10e39c981f2de6441b54efde32ced8f0,
     type: 3}
   m_PrefabInstance: {fileID: 5216444903121923775}
   m_PrefabAsset: {fileID: 0}
@@ -916,6 +916,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7462704725787537060}
     m_Modifications:
+    - target: {fileID: 3125677879684207462, guid: 2451e455f847a4c958e1c4acdf9a96c8,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5292170165415620077, guid: 2451e455f847a4c958e1c4acdf9a96c8,
         type: 3}
       propertyPath: m_Name
