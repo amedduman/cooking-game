@@ -54,13 +54,11 @@ public class Recipe : MonoBehaviour
         {
             if(RecepieVisualInfoList[i].IsAdded == false)
             {
-                //Debug.Log(RecepieVisualInfoList[i].MyKitchenObjSO.Name);
                 completion = false;
             }
         }
 
         MyCompletionStatus.IsCompleted = completion;
-        Debug.Log(completion);
     }
 }
 

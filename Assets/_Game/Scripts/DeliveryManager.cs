@@ -4,19 +4,54 @@ using UnityEngine;
 
 public class DeliveryManager : MonoBehaviour
 {
+
     [SerializeField] Recipe[] _possibleRecipes;
     [SerializeField] float _timeBetweenEachOrder = 4;
     [SerializeField] int _maxNumberOfOrdersCanbeAtTheSameTime = 2;
     [SerializeField] int _totalNumberOfOrdersToPrepare = 3;
+    [SerializeField] int _timeToCompleteOrders = 10;
     int _createdOrderNumber;
-    public Queue<Recipe> _orders = new();
+    int _readyOrderCount;
+    float _gameTimer;
+
+    Queue<Recipe> _orders = new();
     DeliveryUI _deliveryUI;
 
     private void Start()
     {
         _deliveryUI = ServiceLocator.Get<DeliveryUI>();
         StartCoroutine(AddToOrderQueue());
+        StartCoroutine(GameTimer());
     }
+
+    IEnumerator GameTimer()
+    {
+        while(ShouldTimerRun())
+        {
+            _gameTimer += Time.deltaTime;
+            ServiceLocator.Get<GameTimerCanvas>().UpdateTheTimer(_timeToCompleteOrders - (int)_gameTimer);
+            if ((int)_gameTimer >= _timeToCompleteOrders)
+            {
+                if (_readyOrderCount < _totalNumberOfOrdersToPrepare)
+                {
+                    Debug.Log("lose");
+                }
+            }
+
+            yield return null;
+        }
+
+        bool ShouldTimerRun()
+        {
+            if(_readyOrderCount < _totalNumberOfOrdersToPrepare)
+            {
+                return (int)_gameTimer < _timeToCompleteOrders;
+            }
+            return false;
+        }
+    }
+
+
 
     IEnumerator AddToOrderQueue()
     {
@@ -52,7 +87,14 @@ public class DeliveryManager : MonoBehaviour
         if(kitchenObj.MyRecipe.MyCompletionStatus.IsCompleted)
         {
             Debug.Log("completed meal");
+            _readyOrderCount++;
             Destroy(kitchenObj.gameObject);
+
+            if (_readyOrderCount == _totalNumberOfOrdersToPrepare)
+            {
+                Debug.Log("win");
+            }
+
             return true;
         }
         return false;
