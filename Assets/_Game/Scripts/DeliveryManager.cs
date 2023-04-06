@@ -45,4 +45,34 @@ public class DeliveryManager : MonoBehaviour
     {
         return _orders.Count > 0;
     }
+
+    public bool EvaluateRecipe(KitchenObject kitchenObj)
+    {
+        DebugCode();
+        if(kitchenObj.MyRecipe.MyCompletionStatus.IsCompleted)
+        {
+            Debug.Log("completed meal");
+            Destroy(kitchenObj.gameObject);
+            return true;
+        }
+        return false;
+
+        void DebugCode()
+        {
+            if (kitchenObj.IsPlate)
+            {
+                if (kitchenObj.MyRecipe)
+                {
+                }
+                else
+                {
+                    Debug.Log("the plate doesn't have recipe. Thsi shouln't happen");
+                }
+            }
+            else
+            {
+                Debug.Log("kitchen obj is not plate. this shouldn't happen");
+            }
+        }
+    }
 }

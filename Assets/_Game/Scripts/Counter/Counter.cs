@@ -37,9 +37,14 @@ public abstract class Counter : MonoBehaviour, IInteractable
         _selectedCounterVisual.SetActive(false);
     }
 
-    protected void PutKitchenObjToPos(KitchenObject myKitchenObj)
+    protected void PutKitchenObjToPos(KitchenObject myKitchenObj, Action functToCallWhenComplete = null)
     {
         myKitchenObj.transform.parent = _kitchenObjectPoint;
-        myKitchenObj.transform.DOLocalMove(Vector3.zero, .2f);
+        myKitchenObj.transform.DOLocalMove(Vector3.zero, .2f).OnComplete(() => {
+            if(functToCallWhenComplete != null)
+            {
+                functToCallWhenComplete.Invoke();
+            }
+        });
     }
 }

@@ -24,6 +24,7 @@ public class Recipe : MonoBehaviour
                     RecepieVisualInfoList[i].Visual.SetActive(true);
                     RecepieVisualInfoList[i].IconBg.color = Color.green;
                     RecepieVisualInfoList[i].IsAdded = true;
+                    CheckCompletion();
                     return true;
                 }
             }
@@ -36,6 +37,7 @@ public class Recipe : MonoBehaviour
                 RecepieVisualInfoList[i].IconBg.color = Color.red;
                 RecepieVisualInfoList[i].IsAdded = true;
                 MyCompletionStatus.IsFaulty = true;
+                CheckCompletion();
                 return true;
             }
         }
@@ -52,16 +54,13 @@ public class Recipe : MonoBehaviour
         {
             if(RecepieVisualInfoList[i].IsAdded == false)
             {
+                //Debug.Log(RecepieVisualInfoList[i].MyKitchenObjSO.Name);
                 completion = false;
             }
         }
 
         MyCompletionStatus.IsCompleted = completion;
-    }
-
-    void UpdateUI()
-    {
-            
+        Debug.Log(completion);
     }
 }
 
