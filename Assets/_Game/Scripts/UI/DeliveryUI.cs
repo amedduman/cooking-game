@@ -23,7 +23,34 @@ public class DeliveryUI : MonoBehaviour
     {
         DestroyAllChildObjects(transform);
 
+        //foreach (var order in waitingOrders)
+        //{
+        //    OrderUI orderUI = Instantiate(_orderUIprefab, _orderUIparent);
+        //    orderUI.SetOrderUI(order.MyRecipe.RecipeName, order.IsBeingPrepared);
+        //}
+
+        List<OrderInfo> preparingOrders = new();
+        List<OrderInfo> notPreparingOrders = new();
+
         foreach (var order in waitingOrders)
+        {
+            if(order.IsBeingPrepared)
+            {
+                preparingOrders.Add(order);
+            }
+            else
+            {
+                notPreparingOrders.Add(order);
+            }
+        }
+
+        foreach (var order in preparingOrders)
+        {
+            OrderUI orderUI = Instantiate(_orderUIprefab, _orderUIparent);
+            orderUI.SetOrderUI(order.MyRecipe.RecipeName, order.IsBeingPrepared);
+        }
+
+        foreach (var order in notPreparingOrders)
         {
             OrderUI orderUI = Instantiate(_orderUIprefab, _orderUIparent);
             orderUI.SetOrderUI(order.MyRecipe.RecipeName, order.IsBeingPrepared);
