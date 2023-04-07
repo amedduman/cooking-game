@@ -35,7 +35,7 @@ public class DeliveryManager : MonoBehaviour
             {
                 if(_waitingOrders.Count > 0)
                 {
-                    Debug.Log("lose");
+                    ServiceLocator.Get<GameManager>().LoseGame();
                 }
             }
 

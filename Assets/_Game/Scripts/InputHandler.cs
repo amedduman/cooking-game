@@ -18,6 +18,11 @@ public class InputHandler : MonoBehaviour
         _playerInputActions.Player.InteractAlternate.performed += HandleInteractAlternateAction;
     }
 
+    public void DisableInput()
+    {
+        _playerInputActions.Disable();
+    }
+
     void HandleInteractAction(InputAction.CallbackContext obj)
     {
         OnInteractButtonPressed?.Invoke();        
