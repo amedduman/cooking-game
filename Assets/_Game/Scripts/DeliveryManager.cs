@@ -121,38 +121,55 @@ public class DeliveryManager : MonoBehaviour
 
     public bool EvaluateRecipe(KitchenObject kitchenObj)
     {
-        DebugCode();
+        #region DebugCode
+        if (kitchenObj.IsPlate)
+        {
+            if (kitchenObj.MyRecipe)
+            {
+            }
+            else
+            {
+                Debug.Log("the plate doesn't have recipe. Thsi shouln't happen");
+            }
+        }
+        else
+        {
+            Debug.Log("kitchen obj is not plate. this shouldn't happen");
+        }
+        #endregion
+
         if (kitchenObj.MyRecipe.MyCompletionStatus.IsCompleted)
         {
-            Debug.Log("completed meal");
+            var order = GetOrder(kitchenObj.MyRecipe);
+            _waitingOrders.Remove(order);
+            _deliveryUI.UpdateWaitingOrderList(_waitingOrders);
             _deliveredOrderCount++;
             Destroy(kitchenObj.gameObject);
 
             if (_deliveredOrderCount == _totalNumberOfOrdersToPrepare)
             {
-                Debug.Log("win");
+                ServiceLocator.Get<GameManager>().WinGame();
             }
 
             return true;
         }
         return false;
 
-        void DebugCode()
+        OrderInfo GetOrder(Recipe recipe)
         {
-            if (kitchenObj.IsPlate)
+            foreach (var order in _waitingOrders)
             {
-                if (kitchenObj.MyRecipe)
+                if(order.IsBeingPrepared)
                 {
-                }
-                else
-                {
-                    Debug.Log("the plate doesn't have recipe. Thsi shouln't happen");
+                    if(order.MyRecipe.RecipeName == recipe.RecipeName)
+                    {
+                        return order;
+                    }
                 }
             }
-            else
-            {
-                Debug.Log("kitchen obj is not plate. this shouldn't happen");
-            }
+
+            Debug.Log("This function shouldn't return a null");
+            throw new System.NotImplementedException();
         }
     }
     #endregion
