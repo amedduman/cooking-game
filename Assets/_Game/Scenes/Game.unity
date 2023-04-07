@@ -1712,8 +1712,8 @@ MonoBehaviour:
   - {fileID: 5604476054184606673, guid: 0a404a5728cee4d1b8f4325fbca445b3, type: 3}
   - {fileID: 5604476054184606673, guid: 75602e53aef1f4a11a103a44d76cae77, type: 3}
   _timeBetweenEachOrder: 1
-  _maxNumberOfOrdersCanbeAtTheSameTime: 1
-  _totalNumberOfOrdersToPrepare: 1
+  _maxNumberOfOrdersCanbeAtTheSameTime: 10
+  _totalNumberOfOrdersToPrepare: 5
   _timeToCompleteOrders: 100
 --- !u!4 &1100664826
 Transform:
@@ -3342,31 +3342,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WaitingOrderCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 5984886721938230076, guid: 9a34881597e414788895c606a7440363,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5984886721938230076, guid: 9a34881597e414788895c606a7440363,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5984886721938230076, guid: 9a34881597e414788895c606a7440363,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5984886721938230076, guid: 9a34881597e414788895c606a7440363,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5984886721938230076, guid: 9a34881597e414788895c606a7440363,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a34881597e414788895c606a7440363, type: 3}

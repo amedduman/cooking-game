@@ -98,7 +98,7 @@ public class KitchenObject : MonoBehaviour
 
     public void InstantiateRecipe()
     {
-        MyRecipePrefab = ServiceLocator.Get<DeliveryManager>().GetTopOrder();
+        MyRecipePrefab = ServiceLocator.Get<DeliveryManager>().GetTopOrder().MyRecipe;
         MyRecipe = Instantiate(MyRecipePrefab, transform.position, Quaternion.identity, transform);
     }
     

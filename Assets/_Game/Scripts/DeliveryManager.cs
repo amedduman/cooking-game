@@ -4,35 +4,37 @@ using UnityEngine;
 
 public class DeliveryManager : MonoBehaviour
 {
-
     [SerializeField] Recipe[] _possibleRecipes;
     [SerializeField] float _timeBetweenEachOrder = 4;
     [SerializeField] int _maxNumberOfOrdersCanbeAtTheSameTime = 2;
     [SerializeField] int _totalNumberOfOrdersToPrepare = 3;
     [SerializeField] int _timeToCompleteOrders = 10;
-    int _createdOrderNumber;
-    int _readyOrderCount;
+    int _givenOrderNumber;
+    int _deliveredOrderCount;
     float _gameTimer;
 
-    Queue<Recipe> _orders = new();
+    List<OrderInfo> _waitingOrders = new();
     DeliveryUI _deliveryUI;
 
+    #region mb
     private void Start()
     {
         _deliveryUI = ServiceLocator.Get<DeliveryUI>();
-        StartCoroutine(AddToOrderQueue());
+        StartCoroutine(GenerateWaitingOrderList());
         StartCoroutine(GameTimer());
     }
+    #endregion
 
+    #region private
     IEnumerator GameTimer()
     {
-        while(ShouldTimerRun())
+        while (ShouldTimerRun())
         {
             _gameTimer += Time.deltaTime;
             ServiceLocator.Get<GameTimerCanvas>().UpdateTheTimer(_timeToCompleteOrders - (int)_gameTimer);
             if ((int)_gameTimer >= _timeToCompleteOrders)
             {
-                if (_readyOrderCount < _totalNumberOfOrdersToPrepare)
+                if (_deliveredOrderCount < _totalNumberOfOrdersToPrepare)
                 {
                     Debug.Log("lose");
                 }
@@ -43,7 +45,7 @@ public class DeliveryManager : MonoBehaviour
 
         bool ShouldTimerRun()
         {
-            if(_readyOrderCount < _totalNumberOfOrdersToPrepare)
+            if (_deliveredOrderCount < _totalNumberOfOrdersToPrepare)
             {
                 return (int)_gameTimer < _timeToCompleteOrders;
             }
@@ -51,46 +53,82 @@ public class DeliveryManager : MonoBehaviour
         }
     }
 
-
-
-    IEnumerator AddToOrderQueue()
+    IEnumerator GenerateWaitingOrderList()
     {
-        while (_createdOrderNumber < _totalNumberOfOrdersToPrepare)
+        while (_givenOrderNumber < _totalNumberOfOrdersToPrepare)
         {
-            if(_orders.Count < _maxNumberOfOrdersCanbeAtTheSameTime)
+            if (_waitingOrders.Count < _maxNumberOfOrdersCanbeAtTheSameTime)
             {
-                var order = _possibleRecipes[Random.Range(0, _possibleRecipes.Length)];
-                _orders.Enqueue(order);
-                _deliveryUI.AddOrder(order);
-                _createdOrderNumber++;
+                var recipe = _possibleRecipes[Random.Range(0, _possibleRecipes.Length)];
+                var order = new OrderInfo(recipe);
+                _waitingOrders.Add(order);
+                _deliveryUI.UpdateWaitingOrderList(_waitingOrders);
+                _givenOrderNumber++;
 
                 yield return new WaitForSecondsRealtime(_timeBetweenEachOrder);
             }
             yield return null;
         }
     }
+    #endregion
 
-    public Recipe GetTopOrder()
+    #region public
+    public OrderInfo GetTopOrder()
     {
-        _deliveryUI.RemoveOrder();
-        return _orders.Dequeue();
+        OrderInfo topOrder = null;
+
+        foreach (var order in _waitingOrders)
+        {
+            if (order.IsBeingPrepared == false)
+            {
+                topOrder = order;
+                break;
+            }
+        }
+
+        #region DebugCode
+        if (topOrder == null)
+        {
+            Debug.Log("waiting order list is null but you are requesting for order. this behaviour shouldn't happen!");
+            return null;
+        }
+        #endregion
+        topOrder.IsBeingPrepared = true;
+        _deliveryUI.UpdateWaitingOrderList(_waitingOrders);
+        return topOrder;
     }
 
-    public bool HasOrderNotInProgress()
+    public void OrderTrashed(Recipe recipe)
     {
-        return _orders.Count > 0;
+        foreach (var order in _waitingOrders)
+        {
+            if (order.IsBeingPrepared)
+            {
+                if (order.MyRecipe.RecipeName == recipe.RecipeName)
+                {
+                    order.IsBeingPrepared = false;
+                    _deliveryUI.UpdateWaitingOrderList(_waitingOrders);
+                    break;
+                }
+            }
+        }
+    }
+
+    public bool HasAnyWaitingOrder()
+    {
+        return _waitingOrders.Count > 0;
     }
 
     public bool EvaluateRecipe(KitchenObject kitchenObj)
     {
         DebugCode();
-        if(kitchenObj.MyRecipe.MyCompletionStatus.IsCompleted)
+        if (kitchenObj.MyRecipe.MyCompletionStatus.IsCompleted)
         {
             Debug.Log("completed meal");
-            _readyOrderCount++;
+            _deliveredOrderCount++;
             Destroy(kitchenObj.gameObject);
 
-            if (_readyOrderCount == _totalNumberOfOrdersToPrepare)
+            if (_deliveredOrderCount == _totalNumberOfOrdersToPrepare)
             {
                 Debug.Log("win");
             }
@@ -117,4 +155,19 @@ public class DeliveryManager : MonoBehaviour
             }
         }
     }
+    #endregion
+}
+
+public class OrderInfo
+{
+    public OrderInfo(Recipe recipe, bool isCompleted = false, bool isBeingPrepared = false)
+    {
+        MyRecipe = recipe;
+        IsCompleted = isCompleted;
+        IsBeingPrepared = isBeingPrepared;
+    }
+
+    public Recipe MyRecipe;
+    public bool IsCompleted;
+    public bool IsBeingPrepared;
 }

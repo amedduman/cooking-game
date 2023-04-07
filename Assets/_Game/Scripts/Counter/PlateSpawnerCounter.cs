@@ -41,7 +41,7 @@ public class PlateSpawnerCounter : Counter
 
     public override void Interact()
     {
-        if (ServiceLocator.Get<DeliveryManager>().HasOrderNotInProgress() == false) return;
+        if (ServiceLocator.Get<DeliveryManager>().HasAnyWaitingOrder() == false) return;
         if (_plates.Count < 1) return;
         if (_player.MyKitchenObject != null) return;
         var plate = _plates.Pop();

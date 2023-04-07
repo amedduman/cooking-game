@@ -66,7 +66,9 @@ public class Player : MonoBehaviour
     public void DestroyHoldingKitchenObject()
     {
         if (MyKitchenObject != null)
+        {
             Destroy(MyKitchenObject.gameObject);
+        }
     }
 
     void PutKitchenObjectToPos()

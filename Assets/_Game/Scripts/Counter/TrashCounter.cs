@@ -6,10 +6,12 @@ public class TrashCounter : Counter
     public override void Interact()
     {
         if(_player.MyKitchenObject != null)
-            _player.DestroyHoldingKitchenObject();
-        else
         {
-            Debug.Log("not null");
+            if(_player.MyKitchenObject.IsPlate)
+            {
+                ServiceLocator.Get<DeliveryManager>().OrderTrashed(_player.MyKitchenObject.MyRecipe);
+            }
+            _player.DestroyHoldingKitchenObject();
         }
     }
 }
