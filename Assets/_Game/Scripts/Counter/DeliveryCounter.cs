@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DeliveryCounter : Counter
 {
+    [SerializeField] DeliveryCounterUI _deliveryCounterUI;
     KitchenObject _myKitchenObj;
 
     public override void Interact()
@@ -31,6 +32,7 @@ public class DeliveryCounter : Counter
         void WhenObjIsOnDeliveryCounter()
         {
             _myKitchenObj = returnedObj;
+            _deliveryCounterUI.ShowDeliveryResultUI(_myKitchenObj.MyRecipe);
             var result = ServiceLocator.Get<DeliveryManager>().EvaluateRecipe(_myKitchenObj);
             if (result)
             {

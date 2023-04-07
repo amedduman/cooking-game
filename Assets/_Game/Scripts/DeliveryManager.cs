@@ -163,11 +163,11 @@ public class OrderInfo
     public OrderInfo(Recipe recipe, bool isCompleted = false, bool isBeingPrepared = false)
     {
         MyRecipe = recipe;
-        IsCompleted = isCompleted;
+        //IsCompleted = isCompleted;
         IsBeingPrepared = isBeingPrepared;
     }
 
     public Recipe MyRecipe;
-    public bool IsCompleted;
+    //public bool IsCompleted;
     public bool IsBeingPrepared;
 }
