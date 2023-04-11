@@ -14,6 +14,7 @@ public class Recipe : MonoBehaviour
     {
 
         if (kitchenObj.IsIngredient == false) return false;
+        if (kitchenObj.MyKitchenObjSo == null) return false;
 
         for (int i = 0; i < RecepieVisualInfoList.Length; i++)
         {
